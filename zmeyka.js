@@ -35,7 +35,7 @@ setInterval(function(){
     g.fillRect(pob.x, pob.y, s, s);   
     // s - это ширина и высота нашего "квадрата"
   });
-}, 1000/50);
+}, 1000/100);
 onkeydown = function (e) {
   var k = e.keyCode;
   if ([38,39,40,37].indexOf(k) >= 0) 
