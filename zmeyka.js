@@ -10,24 +10,25 @@ newB = function () {
   sBody = [{x: 0,y: 0}];
 }
 var gP = document.getElementById('gP'), //Достаем canvas
-  sc = document.getElementById('sc'),
-  score = sc.getContext('2d'),
   g = gP.getContext('2d'), //Получаем "контакс" (методы для рисования в canvas) //Сохраняем для удобства
   sBody = null, //Начально тело змейки - два элемента
   d = 1, //Направление змейки 1 - dправо, 2 - вниз 3 - влево, 4 - вверх
   a = null, //Яблоко, массив, 0 элемент - x, 1 элемнт - y
   s = 25; 
-newB(); 
-newA(); //Создаем змейку
+newB(); //Создаем змейку
+newA(); 
 gP.width = innerWidth; //Сохранем четкость изображения, выставив полную ширину экрана
 gP.height = innerHeight; //То же самое, но только с высотой
-score.fillText(s, 20, 20);
 setInterval(function(){
   if (a[0] + s >= gP.width || a[1] + s >= gP.height) newA(); 
   g.clearRect(0,0,gP.width,gP.height); //Очищаем старое
   g.fillStyle = "red";
   g.fillRect(...a, s, s);
   g.fillStyle = "#000";
+  g.font = "40px Arial";
+  g.fillText("Score: " + sBody.length, 1, 40);
+  if (sBody.length >= localStorage.getItem("best")) localStorage.setItem('best', sBody.length);
+  g.fillText("Best: " + localStorage.getItem("best"), 1, 90);
   sBody.forEach(function(el, i){
     if (el.x == sBody[sBody.length - 1].x && el.y == sBody[sBody.length - 1].y && i < sBody.length - 1) sBody.splice(0,sBody.length-1), sBody = [{x:0,y:0}], d = 1; //Проверка на столкновение
   });
@@ -35,7 +36,7 @@ setInterval(function(){
   if (d == 1)  f.x = l.x + s, f.y = Math.round(l.y / s) * s; //Если направление вправо, то тогда сохраняем Y, но меняем X на + s
   if (d == 2) f.y = l.y + s, f.x = Math.round(l.x / s) * s; // Если направление вниз, то сохраняем X, но меняем Y на + s
   if (d == 3) f.x = l.x - s, f.y = Math.round(l.y / s) * s; //Если направление влево, то сохраняем Y, но меняем X на -s
-  if (d == 4) f.y = l.y - s, f.x = Math.round(l.x / s) * s; //Если направление вверх, то сохраняем X, Но меняем Y на -ss
+  if (d == 4) f.y = l.y - s, f.x = Math.round(l.x / s) * s; //Если направление вверх, то сохраняем X, Но меняем Y на -s
   sBody.push(f); //Добавляем хвост после головы с новыми координатами
   sBody.splice(0,1); //Удаляем хвост
   //Отрисовываем каждый элемент змейки
