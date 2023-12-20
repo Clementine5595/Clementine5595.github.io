@@ -1,6 +1,14 @@
-var rand = function (min, max) {k = Math.floor(Math.random() * (max - min) + min); return (Math.round( k / s) * s);}
-var newA = function () {a = [rand(0, innerWidth),rand(0, innerHeight)];},
-  newB = function () {sBody = [{x: 0,y: 0}];}
+var rand = function (min, max) {
+  k = Math.floor(Math.random() * (max - min) + min); 
+  return (Math.round( k / s) * s);
+}
+var speed = 1000/10;
+var newA = function () {
+  a = [rand(0, innerWidth),rand(0, innerHeight)];
+},
+newB = function () {
+  sBody = [{x: 0,y: 0}];
+}
 var gP = document.getElementById('gP'), //Достаем canvas
   g = gP.getContext('2d'), //Получаем "контакс" (методы для рисования в canvas) //Сохраняем для удобства
   sBody = null, //Начально тело змейки - два элемента
@@ -35,7 +43,7 @@ setInterval(function(){
     g.fillRect(pob.x, pob.y, s, s);   
     // s - это ширина и высота нашего "квадрата"
   });
-}, 1000/10);
+}, speed);
 onkeydown = function (e) {
   var k = e.keyCode;
   if ([38,39,40,37].indexOf(k) >= 0) 
