@@ -21,7 +21,7 @@ newB();
 newA(); //Создаем змейку
 gP.width = innerWidth; //Сохранем четкость изображения, выставив полную ширину экрана
 gP.height = innerHeight; //То же самое, но только с высотой
-score.fillText(s, 0, 0);
+score.fillText(s, 20, 20);
 setInterval(function(){
   if (a[0] + s >= gP.width || a[1] + s >= gP.height) newA(); 
   g.clearRect(0,0,gP.width,gP.height); //Очищаем старое
