@@ -10,6 +10,8 @@ newB = function () {
   sBody = [{x: 0,y: 0}];
 }
 var gP = document.getElementById('gP'), //Достаем canvas
+  sc = document.getElementById('sc'),
+  score = sc.getContext('2d'),
   g = gP.getContext('2d'), //Получаем "контакс" (методы для рисования в canvas) //Сохраняем для удобства
   sBody = null, //Начально тело змейки - два элемента
   d = 1, //Направление змейки 1 - dправо, 2 - вниз 3 - влево, 4 - вверх
@@ -19,6 +21,7 @@ newB();
 newA(); //Создаем змейку
 gP.width = innerWidth; //Сохранем четкость изображения, выставив полную ширину экрана
 gP.height = innerHeight; //То же самое, но только с высотой
+score.fillText(s, 0, 0);
 setInterval(function(){
   if (a[0] + s >= gP.width || a[1] + s >= gP.height) newA(); 
   g.clearRect(0,0,gP.width,gP.height); //Очищаем старое
