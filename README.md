@@ -2,5 +2,5 @@
 Snake game on HTML5 and JavaScript
 Игра Змейка на HTML5 и JavaScript
 ------------------------------------
-Created by Dmitry Erlichenkov
+Created by Dmitry Erlichenkov\n
 Создано Дмитрием Ерлыченковым
