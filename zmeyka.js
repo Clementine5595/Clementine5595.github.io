@@ -19,9 +19,10 @@ newB(); //Создаем змейку
 newA(); 
 gP.width = innerWidth; //Сохранем четкость изображения, выставив полную ширину экрана
 gP.height = innerHeight; //То же самое, но только с высотой
+gP.addEventListener("touchstart", function (e) { TouchStart(e); });
+gP.addEventListener("touchend", function (e) { TouchEnd(e); });
 setInterval(function(){
   if (a[0] + s >= gP.width || a[1] + s >= gP.height) newA(); 
-  gP.addEventListener("touchstart", function (e) { TouchStart(e); });
   g.clearRect(0,0,gP.width,gP.height); //Очищаем старое
   g.fillStyle = "red";
   g.fillRect(...a, s, s);
@@ -50,7 +51,10 @@ setInterval(function(){
     g.fillRect(pob.x, pob.y, s, s);   
     // s - это ширина и высота нашего "квадрата"
   });
-  console.log(tStart.x);
+  if(0 < tPos.x && d != 1) d = 3;
+  if(0 > tPos.x && d != 3) d = 1;
+  if(0 < tPos.y && d != 4) d = 2;
+  if(0 > tPos.y && d != 2) d = 4;
 }, speed);
 onkeydown = function (e) {
   var k = e.keyCode;
@@ -67,10 +71,4 @@ function TouchStart(e)
     //Получаем текущую позицию касания
     tStart = { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY };
     tPos = { x: tStart.x, y: tStart.y };
-    if(0 < tPos.x) d = 3;
-    if(0 > tPos.x) d = 1;
-    if(0 < tPos.y) d = 2;
-    if(0 > tPos.y) d = 4;
-    tStart = null;
-    tPos = null;
 }
