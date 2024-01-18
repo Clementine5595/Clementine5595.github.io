@@ -54,10 +54,6 @@ setInterval(function(){
     g.fillRect(pob.x, pob.y, s, s);   
     // s - это ширина и высота нашего "квадрата"
   });
-  /*if(0 < tPos.x && d != 1) d = 3;
-  if(0 > tPos.x && d != 3) d = 1;
-  if(0 < tPos.y && d != 4) d = 2;
-  if(0 > tPos.y && d != 2) d = 4;*/
 }, speed);
 onkeydown = function (e) {
   var k = e.keyCode;
@@ -75,7 +71,7 @@ function TouchStart(e)
     tStart = { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY };
     tPos = { x: tStart.x, y: tStart.y };
 }
-function TouchEnd(e, color)
+function TouchEnd(e)
 {
     CheckAction(); //Определяем, какой жест совершил пользователь
     //Очищаем позиции
