@@ -102,16 +102,3 @@ onkeydown = function (e) {
   if (k == 37 && d != 1) d = 3; //Влево
   if (k == 38 && d != 2) d = 4; //Вверх
 };
-function TouchStart(e)
-{
-    //Получаем текущую позицию касания
-    
-}
-function TouchEnd(e)
-{
-    
-}
-function CheckAction()
-{
-    
-}
