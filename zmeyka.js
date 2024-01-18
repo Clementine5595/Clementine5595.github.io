@@ -19,14 +19,14 @@ var gP = document.getElementById('gP'), //Достаем canvas
   sBody = null, //Начально тело змейки - два элемента
   d = 1, //Направление змейки 1 - dправо, 2 - вниз 3 - влево, 4 - вверх
   a = null, //Яблоко, массив, 0 элемент - x, 1 элемнт - y
-  s = 25; 
-gP.addEventListener("touchstart", function (e) { TouchStart(e); });
+  s = 25;
 newB(); //Создаем змейку
 newA(); 
 gP.width = innerWidth; //Сохранем четкость изображения, выставив полную ширину экрана
 gP.height = innerHeight; //То же самое, но только с высотой
 setInterval(function(){
   if (a[0] + s >= gP.width || a[1] + s >= gP.height) newA(); 
+  gP.addEventListener("touchstart", function (e) { TouchStart(e); });
   g.clearRect(0,0,gP.width,gP.height); //Очищаем старое
   g.fillStyle = "red";
   g.fillRect(...a, s, s);
