@@ -1,3 +1,6 @@
+const sens = 20;
+var tStart = null,
+  tPos = null;
 var rand = function (min, max) {
   k = Math.floor(Math.random() * (max - min) + min); 
   return (Math.round( k / s) * s);
@@ -76,22 +79,22 @@ function TouchEnd(e, color)
 {
     CheckAction(); //Определяем, какой жест совершил пользователь
     //Очищаем позиции
-    touchStart = null;
-    touchPosition = null;
+    tStart = null;
+    tPos = null;
 }
 function CheckAction()
 {
-    var d = //Получаем расстояния от начальной до конечной точек по обеим осям
+    var r = //Получаем расстояния от начальной до конечной точек по обеим осям
     {
-   	 x: touchStart.x - touchPosition.x,
-   	 y: touchStart.y - touchPosition.y
+   	 x: tStart.x - tPos.x,
+   	 y: tStart.y - tPos.y
     };
 
-    if(Math.abs(d.x) > Math.abs(d.y)) //Проверяем, движение по какой оси было длиннее
+    if(Math.abs(r.x) > Math.abs(r.y)) //Проверяем, движение по какой оси было длиннее
     {
-   	 if(Math.abs(d.x) > sensitivity) //Проверяем, было ли движение достаточно длинным
+   	 if(Math.abs(r.x) > sens) //Проверяем, было ли движение достаточно длинным
    	 {
-   		 if(d.x > 0) //Если значение больше нуля, значит пользователь двигал пальцем налево
+   		 if(r.x > 0) //Если значение больше нуля, значит пользователь двигал пальцем налево
    		 {
          d = 3;
    		 }
@@ -103,9 +106,9 @@ function CheckAction()
     }
     else //Аналогичные проверки для вертикальной оси
     {
-   	 if(Math.abs(d.y) > sensitivity)
+   	 if(Math.abs(r.y) > sens)
    	 {
-   		 if(d.y > 0) //Свайп вверх
+   		 if(r.y > 0) //Свайп вверх
    		 {
          d = 4;
    		 }
