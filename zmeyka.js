@@ -22,8 +22,45 @@ newB(); //Создаем змейку
 newA(); 
 gP.width = innerWidth; //Сохранем четкость изображения, выставив полную ширину экрана
 gP.height = innerHeight; //То же самое, но только с высотой
-gP.addEventListener("touchstart", function (e) { TouchStart(e); });
-gP.addEventListener("touchend", function (e) { TouchEnd(e); });
+
+
+gP.addEventListener("touchstart", function (e) { 
+  tStart = { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY };
+  tPos = { x: tStart.x, y: tStart.y }; 
+});
+
+
+gP.addEventListener("touchend", function (e) { 
+  var r = {
+   	  x: tStart.x - tPos.x,
+   	  y: tStart.y - tPos.y
+    };
+
+    if(Math.abs(r.x) > Math.abs(r.y)) {
+   	  if(Math.abs(r.x) > sens) {
+   		  if(r.x > 0) {
+          d = 3;
+   		  }
+   		  else {
+          d = 1;
+   		  }
+      }
+    }
+    else {
+   	 if(Math.abs(r.y) > sens) {
+   		 if(r.y > 0) {
+         d = 4;
+   		 }
+   		 else {
+         d = 2;
+   		 }
+   	 }
+    }
+  tStart = null;
+  tPos = null;
+});
+
+
 setInterval(function(){
   if (a[0] + s >= gP.width || a[1] + s >= gP.height) newA(); 
   g.clearRect(0,0,gP.width,gP.height); //Очищаем старое
@@ -68,50 +105,13 @@ onkeydown = function (e) {
 function TouchStart(e)
 {
     //Получаем текущую позицию касания
-    tStart = { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY };
-    tPos = { x: tStart.x, y: tStart.y };
+    
 }
 function TouchEnd(e)
 {
-    CheckAction(); //Определяем, какой жест совершил пользователь
-    //Очищаем позиции
-    tStart = null;
-    tPos = null;
+    
 }
 function CheckAction()
 {
-    var r = //Получаем расстояния от начальной до конечной точек по обеим осям
-    {
-   	 x: tStart.x - tPos.x,
-   	 y: tStart.y - tPos.y
-    };
-
-    if(Math.abs(r.x) > Math.abs(r.y)) //Проверяем, движение по какой оси было длиннее
-    {
-   	 if(Math.abs(r.x) > sens) //Проверяем, было ли движение достаточно длинным
-   	 {
-   		 if(r.x > 0) //Если значение больше нуля, значит пользователь двигал пальцем налево
-   		 {
-         d = 3;
-   		 }
-   		 else //Иначе он двигал им направо
-   		 {
-         d = 1;
-   		 }
-   	 }
-    }
-    else //Аналогичные проверки для вертикальной оси
-    {
-   	 if(Math.abs(r.y) > sens)
-   	 {
-   		 if(r.y > 0) //Свайп вверх
-   		 {
-         d = 4;
-   		 }
-   		 else //Свайп вниз
-   		 {
-         d = 2;
-   		 }
-   	 }
-    }
+    
 }
