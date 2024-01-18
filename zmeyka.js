@@ -72,7 +72,7 @@ function TouchStart(e)
     //Получаем текущую позицию касания
     tStart = { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY };
     tPos = { x: tStart.x, y: tStart.y };
-    console.log(tPos.x);
+    console.log(tStart.x);
     if(0 < tPos.x) d = 3;
     if(0 > tPos.x) d = 1;
     if(0 < tPos.y) d = 2;
