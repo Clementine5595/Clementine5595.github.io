@@ -1,8 +1,3 @@
-///////////////touchscreen setup////////////////////////////
-const sens = 20;
-var tStart = null,
-  tPos = null;
-
 var rand = function (min, max) {
   k = Math.floor(Math.random() * (max - min) + min); 
   return (Math.round( k / s) * s);
@@ -20,14 +15,13 @@ var gP = document.getElementById('gP'), //Достаем canvas
   d = 1, //Направление змейки 1 - dправо, 2 - вниз 3 - влево, 4 - вверх
   a = null, //Яблоко, массив, 0 элемент - x, 1 элемнт - y
   s = 25;
-//gP.addEventListener("touchstart", function (e) { TouchStart(e); });
 newB(); //Создаем змейку
 newA(); 
 gP.width = innerWidth; //Сохранем четкость изображения, выставив полную ширину экрана
 gP.height = innerHeight; //То же самое, но только с высотой
 setInterval(function(){
   if (a[0] + s >= gP.width || a[1] + s >= gP.height) newA(); 
-  //TouchStart(e);
+  gP.addEventListener("touchstart", function (e) { TouchStart(e); });
   g.clearRect(0,0,gP.width,gP.height); //Очищаем старое
   g.fillStyle = "red";
   g.fillRect(...a, s, s);
@@ -56,15 +50,7 @@ setInterval(function(){
     g.fillRect(pob.x, pob.y, s, s);   
     // s - это ширина и высота нашего "квадрата"
   });
-  //console.log(tStart.x);
-  tStart = { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY };
-  tPos = { x: tStart.x, y: tStart.y };
-  if(0 < tPos.x) d = 3;
-  if(0 > tPos.x) d = 1;
-  if(0 < tPos.y) d = 2;
-  if(0 > tPos.y) d = 4;
-  tStart = null;
-  tPos = null;
+  console.log(tStart.x);
 }, speed);
 onkeydown = function (e) {
   var k = e.keyCode;
