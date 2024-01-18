@@ -51,10 +51,10 @@ setInterval(function(){
     g.fillRect(pob.x, pob.y, s, s);   
     // s - это ширина и высота нашего "квадрата"
   });
-  if(0 < tPos.x && d != 1) d = 3;
+  /*if(0 < tPos.x && d != 1) d = 3;
   if(0 > tPos.x && d != 3) d = 1;
   if(0 < tPos.y && d != 4) d = 2;
-  if(0 > tPos.y && d != 2) d = 4;
+  if(0 > tPos.y && d != 2) d = 4;*/
 }, speed);
 onkeydown = function (e) {
   var k = e.keyCode;
@@ -71,4 +71,48 @@ function TouchStart(e)
     //Получаем текущую позицию касания
     tStart = { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY };
     tPos = { x: tStart.x, y: tStart.y };
+}
+function TouchEnd(e, color)
+{
+    CheckAction(); //Определяем, какой жест совершил пользователь
+    //Очищаем позиции
+    touchStart = null;
+    touchPosition = null;
+}
+function CheckAction()
+{
+    var d = //Получаем расстояния от начальной до конечной точек по обеим осям
+    {
+   	 x: touchStart.x - touchPosition.x,
+   	 y: touchStart.y - touchPosition.y
+    };
+
+    if(Math.abs(d.x) > Math.abs(d.y)) //Проверяем, движение по какой оси было длиннее
+    {
+   	 if(Math.abs(d.x) > sensitivity) //Проверяем, было ли движение достаточно длинным
+   	 {
+   		 if(d.x > 0) //Если значение больше нуля, значит пользователь двигал пальцем налево
+   		 {
+         d = 3;
+   		 }
+   		 else //Иначе он двигал им направо
+   		 {
+         d = 1;
+   		 }
+   	 }
+    }
+    else //Аналогичные проверки для вертикальной оси
+    {
+   	 if(Math.abs(d.y) > sensitivity)
+   	 {
+   		 if(d.y > 0) //Свайп вверх
+   		 {
+         d = 4;
+   		 }
+   		 else //Свайп вниз
+   		 {
+         d = 2;
+   		 }
+   	 }
+    }
 }
